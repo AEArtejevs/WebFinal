@@ -14,22 +14,27 @@ class Recipes extends Model
     public $timestamp = true;
     protected $fillable =
     [
-    'id',
-    'name',
-    'duration',
-    'descriptions',
-    'img',
-    'category_id',
-    'user_id'
+        'name',
+        'description',
+        'instructions',
+        'duration',
+        'image',
+        'category_id',
+        'user_id',
     ];
 
     public function Users()
     {
-        return $this->hasOne(User::class,'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
     public function Category()
     {
-        return $this->hasOne(Category::class,'id', 'category_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
-
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredients::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')
+            ->withPivot('quantity', 'unit')
+            ->withTimestamps();
+    }
 }

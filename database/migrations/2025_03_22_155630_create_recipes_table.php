@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->integer("duration")->unsigned();
             $table->longText("description");
             $table->longText("instructions");
-            $table->string("image")->nullable(); // Store one image path here if needed
+            $table->string("image")->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Created by user
             $table->timestamps();

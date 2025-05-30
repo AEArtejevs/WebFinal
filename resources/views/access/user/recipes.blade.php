@@ -1,49 +1,62 @@
 <x-app-layout>
-
-{{-- @section('content') --}}
-    <div class="flex flex-col p-2 rounded">
-        <h1 class="font-bold border-b border-gray-600 flex flex-row justify-between items-center p-2 uppercase">
-            Most popurlar recipes
-        </h1>
-    </div>
-    @if (count($recipes) > 0)
-        <div class="bg-gray-100 rounded dark:bg-gray-800 grid gap-2 justify-center lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs-grid-row p-2">
-            @foreach ($recipes as $value)
-                <div id="recipe-{{ $value->id }}"
-                    class="relative max-w-sm border border-gray-200 bg-white border-0.5 rounded shadow-lg
-                    dark:bg-gray-900 dark:border-gray-700">
-                    <div class="h-48 overflow-hidden rounded-t">
-                        <img class="object-cover w-full h-full " src="{{ asset('images/' . $value->img) }}" alt="" />
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 md:text-xl font-bold tracking-tight text-gray-900 break-all dark:text-white">
-                            {{ $value->name }}
-                        </h5>
-                        <p class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis">
-                            {{ $value->descriptions }}
-                        </p>
-                        {{-- <a href="{{ route('show-recipe', $value->id) }}">
-                            <x-buttons.primary-button class="px-3 py-2">
-                                {{ __('Read more') }}
-                                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </x-buttons.primary-button>
-                        </a> --}}
-                    </div>
-                </div>
-            @endforeach
-
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header / Create Button -->
+        <div class="flex justify-between items-center mt-6 mb-4 p-4 bg-gray-200 dark:bg-gray-800 rounded-lg shadow">
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">My Recipes</h1>
+            <a href="{{ route('recipes.create') }}" class="text-blue-600 hover:text-blue-800" title="Create Recipe">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4v16m8-8H4" />
+                </svg>
+            </a>
         </div>
-        {!! $recipes->links() !!}
+
+        <!-- Recipes Grid -->
+        @if ($recipes->count())
+            <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                @foreach ($recipes as $value)
+ <div class="border border-gray-200 bg-white rounded shadow dark:bg-gray-900 dark:border-gray-700 relative">
+    <!-- Delete button top right -->
+<form action="{{ route('recipes.destroy', $value->id) }}" method="POST"
+      class="absolute top-2 right-2"
+      onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+    @csrf
+    @method('DELETE')
+    <button type="submit"
+        class="bg-red-600 hover:bg-red-700 text-white rounded p-1 focus:outline-none focus:ring-2 focus:ring-red-500"
+        aria-label="Delete Recipe">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7L5 7M10 11v6m4-6v6M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12" />
+        </svg>
+    </button>
+</form>
+
+    <div class="h-48 overflow-hidden rounded-t">
+        <img src="{{ asset('images/' . $value->image) }}" alt="Recipe Image"
+             class="w-full h-full object-cover">
+    </div>
+    <div class="p-4">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white break-words">
+            {{ $value->name }}
+        </h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3">
+            {{ $value->description }}
+        </p>
+    </div>
+</div>
+
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-6">
+                {!! $recipes->links() !!}
+            </div>
         @else
-            <h1 class="bg-gray-200 m-2 p-2 font-semibold rounded text-center dark:bg-gray-800">
-                No Data Found
-            </h1>
+            <div class="mt-6 text-center text-gray-700 dark:text-gray-300 font-semibold">
+                No recipes found.
+            </div>
         @endif
-    {{-- <script src="{{ asset('js/bookmarks.js') }}"></script> --}}
+    </div>
 </x-app-layout>

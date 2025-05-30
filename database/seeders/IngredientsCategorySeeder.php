@@ -12,26 +12,32 @@ class IngredientsCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        IngredientsCategories::create(["name" => "Additive"]);
-        IngredientsCategories::create(["name" => "Bakery"]);
-        IngredientsCategories::create(["name" => "Beverage"]);
-        IngredientsCategories::create(["name" => "Beverage Alcoholic"]);
-        IngredientsCategories::create(["name" => "Cereal"]);
-        IngredientsCategories::create(["name" => "Dairy"]);
-        IngredientsCategories::create(["name" => "Dish"]);
-        IngredientsCategories::create(["name" => "Essential Oil"]);
-        IngredientsCategories::create(["name" => "Fish"]);
-        IngredientsCategories::create(["name" => "Flower"]);
-        IngredientsCategories::create(["name" => "Fruit"]);
-        IngredientsCategories::create(["name" => "Fungus"]);
-        IngredientsCategories::create(["name" => "Herb"]);
-        IngredientsCategories::create(["name" => "Legume"]);
-        IngredientsCategories::create(["name" => "Maize"]);
-        IngredientsCategories::create(["name" => "Meat"]);
-        IngredientsCategories::create(["name" => "Nuts & Seed"]);
-        IngredientsCategories::create(["name" => "Plant"]);
-        IngredientsCategories::create(["name" => "Seafood"]);
-        IngredientsCategories::create(["name" => "Spice"]);
-        IngredientsCategories::create(["name" => "Vegetable"]);
+        $categories = [
+            'Additive',
+            'Bakery',
+            'Beverage',
+            'Beverage Alcoholic',
+            'Cereal',
+            'Dairy',
+            'Dish',
+            'Essential Oil',
+            'Fish',
+            'Flower',
+            'Fruit',
+            'Fungus',
+            'Herb',
+            'Legume',
+            'Maize',
+            'Meat',
+            'Nuts & Seed',
+            'Plant',
+            'Seafood',
+            'Spice',
+            'Vegetable',
+        ];
+
+        foreach ($categories as $name) {
+            IngredientsCategories::create(['name' => $name]);
+        }
     }
 }

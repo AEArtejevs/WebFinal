@@ -13,14 +13,14 @@
                     class="relative max-w-sm border border-gray-200 bg-white border-0.5 rounded shadow-lg
                     dark:bg-gray-900 dark:border-gray-700">
                     <div class="h-48 overflow-hidden rounded-t">
-                        <img class="object-cover w-full h-full " src="{{ asset('images/' . $value->img) }}" alt="" />
+                        <img class="object-cover w-full h-full " src="{{ asset('images/' . $value->image) }}" alt="" />
                     </div>
                     <div class="p-5">
                         <h5 class="mb-2 md:text-xl font-bold tracking-tight text-gray-900 break-all dark:text-white">
                             {{ $value->name }}
                         </h5>
                         <p class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis">
-                            {{ $value->descriptions }}
+                            {{ $value->description }}
                         </p>
                         {{-- <a href="{{ route('show-recipe', $value->id) }}">
                             <x-buttons.primary-button class="px-3 py-2">

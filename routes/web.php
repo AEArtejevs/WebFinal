@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Auth\CustomRegisterController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,12 +13,20 @@ Route::get('/', function () {
 Route::get('/', [RecipesController::class, 'home'])->name('home');
 Route::get('/recipes', [RecipesController::class, 'index'])->name('recipes.index');
 
-Route::get('/my-recipes', [RecipesController::class, 'userRecipes'])->name('recipes.my');
+
+Route::resource('recipes', RecipesController::class)->only(['create', 'store']);
+Route::middleware('auth')->group(function () {
+    Route::get('/my-recipes', [RecipesController::class, 'userRecipes'])->name('user.recipes');
+    Route::get('/recipes/create', [RecipesController::class, 'create'])->name('recipes.create');
+    Route::delete('/recipes/{id}', [RecipesController::class, 'destroy'])->name('recipes.destroy');
+
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/category/{id}', [RecipesController::class, 'recipesByCategory'])->name('category.show');
 
 
 Route::get('/login', [CustomLoginController::class, 'showLoginForm'])->name('login.form');
