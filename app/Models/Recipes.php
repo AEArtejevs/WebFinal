@@ -20,12 +20,12 @@ class Recipes extends Model
     'descriptions',
     'img',
     'category_id',
-    'users_id'
+    'user_id'
     ];
 
     public function Users()
     {
-        return $this->hasOne(User::class,'id', 'users_id');
+        return $this->hasOne(User::class,'id', 'user_id');
     }
     public function Category()
     {

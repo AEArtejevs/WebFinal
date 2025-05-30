@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ingrediants;
+use App\Models\Ingredients;
 use Illuminate\Http\Request;
 
-class IngrediantsController extends Controller
+class IngredientsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class IngrediantsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ingrediants $ingrediants)
+    public function show(Ingredients $Ingredients)
     {
         //
     }
@@ -42,7 +42,7 @@ class IngrediantsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ingrediants $ingrediants)
+    public function edit(Ingredients $Ingredients)
     {
         //
     }
@@ -50,7 +50,7 @@ class IngrediantsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ingrediants $ingrediants)
+    public function update(Request $request, Ingredients $Ingredients)
     {
         //
     }
@@ -58,7 +58,7 @@ class IngrediantsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ingrediants $ingrediants)
+    public function destroy(Ingredients $Ingredients)
     {
         //
     }

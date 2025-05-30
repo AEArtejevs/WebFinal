@@ -24,7 +24,7 @@
                 </a>
             </div> --}}
 
-            <div class="max-w-screen-xl my-4 mx-auto px-4 py-4 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <div class="max-w-screen">
                 {{ $slot }}
             </div>
         </div>

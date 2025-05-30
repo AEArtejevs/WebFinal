@@ -24,6 +24,13 @@ class RecipesController extends Controller
         $recipes = Recipes::all();
         return view("access.viewer.home", compact('recipes'));
     }
+    public function userRecipes()
+    {
+        $recipes = Recipes::where('user_id', Auth::id())->get();
+        return view("access.user.recipes", compact('recipes'));
+    }
+
+
     public function index()
     {
         // $recipes = Recipes::where('users_id', Auth::id())->paginate(5);
@@ -36,7 +43,7 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
