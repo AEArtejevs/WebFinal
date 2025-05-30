@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\IngredientsCategories;
 
 class IngredientsCategorySeeder extends Seeder
 {
@@ -13,26 +12,26 @@ class IngredientsCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::create(["name" => "Additive"]);
-        Category::create(["name" => "Bakery"]);
-        Category::create(["name" => "Beverage"]);
-        Category::create(["name" => "Beverage Alcoholic"]);
-        Category::create(["name" => "Cereal"]);
-        Category::create(["name" => "Dairy"]);
-        Category::create(["name" => "Dish"]);
-        Category::create(["name" => "Essential Oil"]);
-        Category::create(["name" => "Fish"]);
-        Category::create(["name" => "Flower"]);
-        Category::create(["name" => "Fruit"]);
-        Category::create(["name" => "Fungus"]);
-        Category::create(["name" => "Herb"]);
-        Category::create(["name" => "Legume"]);
-        Category::create(["name" => "Maize"]);
-        Category::create(["name" => "Meat"]);
-        Category::create(["name" => "Nuts & Seed"]);
-        Category::create(["name" => "Plant"]);
-        Category::create(["name" => "Seafood"]);
-        Category::create(["name" => "Spice"]);
-        Category::create(["name" => "Vegetable"]);
+        IngredientsCategories::create(["name" => "Additive"]);
+        IngredientsCategories::create(["name" => "Bakery"]);
+        IngredientsCategories::create(["name" => "Beverage"]);
+        IngredientsCategories::create(["name" => "Beverage Alcoholic"]);
+        IngredientsCategories::create(["name" => "Cereal"]);
+        IngredientsCategories::create(["name" => "Dairy"]);
+        IngredientsCategories::create(["name" => "Dish"]);
+        IngredientsCategories::create(["name" => "Essential Oil"]);
+        IngredientsCategories::create(["name" => "Fish"]);
+        IngredientsCategories::create(["name" => "Flower"]);
+        IngredientsCategories::create(["name" => "Fruit"]);
+        IngredientsCategories::create(["name" => "Fungus"]);
+        IngredientsCategories::create(["name" => "Herb"]);
+        IngredientsCategories::create(["name" => "Legume"]);
+        IngredientsCategories::create(["name" => "Maize"]);
+        IngredientsCategories::create(["name" => "Meat"]);
+        IngredientsCategories::create(["name" => "Nuts & Seed"]);
+        IngredientsCategories::create(["name" => "Plant"]);
+        IngredientsCategories::create(["name" => "Seafood"]);
+        IngredientsCategories::create(["name" => "Spice"]);
+        IngredientsCategories::create(["name" => "Vegetable"]);
     }
 }
