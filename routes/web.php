@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Auth\CustomRegisterController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/recipes/{id}', [RecipesController::class, 'destroy'])->name('recipes.destroy');
 
 });
+Route::post('/favorites/store', [FavoriteController::class, 'store'])->middleware('auth')->name('favorites.store');
+Route::delete('/favorites/delete', [FavoriteController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('favorites.destroy');
+Route::get('/favorites/view', [FavoriteController::class, 'view'])->middleware('auth')->name('favorites.view');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,6 +37,8 @@ Route::get('/category/{id}', [RecipesController::class, 'recipesByCategory'])->n
 
 Route::get('/login', [CustomLoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [CustomLoginController::class, 'login'])->name('login');
+Route::post('/logout', [CustomLoginController::class, 'logout'])->name('logout');
+
 Route::get('/register', [CustomRegisterController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [CustomRegisterController::class, 'register'])->name('register');
 // Route::middleware('auth')->group(function () {

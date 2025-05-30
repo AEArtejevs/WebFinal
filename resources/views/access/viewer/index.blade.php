@@ -1,49 +1,68 @@
-<x-app-layout>
-
-{{-- @section('content') --}}
-    <div class="flex flex-col p-2 rounded">
-        <h1 class="font-bold border-b border-gray-600 flex flex-row justify-between items-center p-2 uppercase">
-            Most popurlar recipes
-        </h1>
-    </div>
-    @if (count($recipes) > 0)
-        <div class="bg-gray-100 rounded dark:bg-gray-800 grid gap-2 justify-center lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs-grid-row p-2">
-            @foreach ($recipes as $value)
-                <div id="recipe-{{ $value->id }}"
-                    class="relative max-w-sm border border-gray-200 bg-white border-0.5 rounded shadow-lg
-                    dark:bg-gray-900 dark:border-gray-700">
-                    <div class="h-48 overflow-hidden rounded-t">
-                        <img class="object-cover w-full h-full " src="{{ asset('images/' . $value->image) }}" alt="" />
-                    </div>
-                    <div class="p-5">
-                        <h5 class="mb-2 md:text-xl font-bold tracking-tight text-gray-900 break-all dark:text-white">
-                            {{ $value->name }}
-                        </h5>
-                        <p class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis">
-                            {{ $value->description }}
-                        </p>
-                        {{-- <a href="{{ route('show-recipe', $value->id) }}">
-                            <x-buttons.primary-button class="px-3 py-2">
-                                {{ __('Read more') }}
-                                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd">
-                                    </path>
-                                </svg>
-                            </x-buttons.primary-button>
-                        </a> --}}
-                    </div>
-                </div>
-            @endforeach
-
-        </div>
-        {!! $recipes->links() !!}
-        @else
-            <h1 class="bg-gray-200 m-2 p-2 font-semibold rounded text-center dark:bg-gray-800">
-                No Data Found
+<x-guest-layout>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="flex flex-col rounded my-3">
+            <h1 class="font-bold border-b border-gray-600 flex flex-row justify-between items-center py-2 uppercase">
+                Most Popular Recipes
             </h1>
+        </div>
+
+        @if ($recipes->count())
+            <div
+                class="bg-white rounded dark:bg-gray-800 grid gap-2 justify-center lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 xs-grid-row p-2">
+                @foreach ($recipes as $recipe)
+                    <div
+                        class="border border-gray-200 bg-white rounded shadow dark:bg-gray-900 dark:border-gray-700 relative max-w-sm">
+                        <form method="POST" action="{{ route('favorites.store') }}" class="absolute top-2 right-2">
+                            @csrf
+                            <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
+                            <button type="submit"
+                                class="p-1 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                aria-label="Bookmark Recipe" title="Bookmark Recipe">
+                                @if ($favoriteRecipeIds->contains($recipe->id))
+                                    <!-- Filled bookmark icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600"
+                                        fill="currentColor" viewBox="0 0 24 24" stroke="none">
+                                        <path d="M5 5v14l7-7 7 7V5z" />
+                                    </svg>
+                                @else
+                                    <!-- Hollow bookmark icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14l7-7 7 7V5z" />
+                                    </svg>
+                                @endif
+                            </button>
+                        </form>
+
+
+                        <div class="h-48 overflow-hidden rounded-t">
+                            <img src="{{ asset('images/' . $recipe->image) }}" alt="Recipe Image"
+                                class="w-full h-full object-cover" />
+                        </div>
+
+                        <div class="p-5">
+                            <h5
+                                class="mb-2 md:text-xl font-bold tracking-tight text-gray-900 break-all dark:text-white">
+                                {{ $recipe->name }}
+                            </h5>
+                            <p
+                                class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis">
+                                {{ $recipe->description }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-6">
+                {!! $recipes->links() !!}
+            </div>
+        @else
+            <div class="mt-6 text-center text-gray-700 dark:text-gray-300 font-semibold">
+                No recipes found.
+            </div>
         @endif
-    {{-- <script src="{{ asset('js/bookmarks.js') }}"></script> --}}
-</x-app-layout>
+    </div>
+</x-guest-layout>

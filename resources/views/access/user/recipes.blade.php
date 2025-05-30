@@ -6,8 +6,7 @@
             <a href="{{ route('recipes.create') }}" class="text-blue-600 hover:text-blue-800" title="Create Recipe">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 4v16m8-8H4" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
             </a>
         </div>
@@ -16,36 +15,37 @@
         @if ($recipes->count())
             <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 @foreach ($recipes as $value)
- <div class="border border-gray-200 bg-white rounded shadow dark:bg-gray-900 dark:border-gray-700 relative">
-    <!-- Delete button top right -->
-<form action="{{ route('recipes.destroy', $value->id) }}" method="POST"
-      class="absolute top-2 right-2"
-      onsubmit="return confirm('Are you sure you want to delete this recipe?');">
-    @csrf
-    @method('DELETE')
-    <button type="submit"
-        class="bg-red-600 hover:bg-red-700 text-white rounded p-1 focus:outline-none focus:ring-2 focus:ring-red-500"
-        aria-label="Delete Recipe">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7L5 7M10 11v6m4-6v6M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12" />
-        </svg>
-    </button>
-</form>
+                    <div class="border border-gray-200 bg-white rounded shadow dark:bg-gray-900 dark:border-gray-700 relative">
+                        <!-- Delete button top right -->
+                        <form action="{{ route('recipes.destroy', $value->id) }}" method="POST"
+                            class="absolute top-2 right-2"
+                            onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="bg-red-600 hover:bg-red-700 text-white rounded p-1 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                aria-label="Delete Recipe">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M19 7L5 7M10 11v6m4-6v6M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12" />
+                                </svg>
+                            </button>
+                        </form>
 
-    <div class="h-48 overflow-hidden rounded-t">
-        <img src="{{ asset('images/' . $value->image) }}" alt="Recipe Image"
-             class="w-full h-full object-cover">
-    </div>
-    <div class="p-4">
-        <h2 class="text-lg font-semibold text-gray-800 dark:text-white break-words">
-            {{ $value->name }}
-        </h2>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3">
-            {{ $value->description }}
-        </p>
-    </div>
-</div>
-
+                        <div class="h-48 overflow-hidden rounded-t">
+                            <img src="{{ asset('images/' . $value->image) }}" alt="Recipe Image"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h2 class="text-lg font-semibold text-gray-800 dark:text-white break-words">
+                                {{ $value->name }}
+                            </h2>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2 line-clamp-3">
+                                {{ $value->description }}
+                            </p>
+                        </div>
+                    </div>
                 @endforeach
             </div>
 

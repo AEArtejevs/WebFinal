@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Recipes;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,10 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    public function favorites()
+    {
+        return $this->belongsToMany(Recipes::class, 'favorites', 'user_id', 'recipe_id');
+    }
     protected $fillable = [
         'name',
         'email',

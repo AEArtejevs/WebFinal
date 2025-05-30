@@ -1,25 +1,27 @@
 <x-guest-layout>
-    <div class="flex items-center justify-center min-h-screen ">
-        <div class="flex bg-white p-10 rounded-xl shadow-md w-full max-w-4xl dark:bg-gray-800">
-            <!-- Logo or Left Side Content -->
-            <div class="hidden md:flex items-center justify-center w-1/2 border-r border-gray-700 pr-8">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="flex flex-col md:flex-row bg-white p-10 m-4 rounded-xl shadow-md w-full max-w-4xl dark:bg-gray-800">
+
+            <!-- Logo section -->
+            <div
+                class="flex items-center justify-center w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-700 md:pr-8 pb-8 md:pb-0">
                 <x-application-logo class="w-24 h-24 text-white" />
             </div>
 
-            <!-- Form Section -->
-            <div class="w-full md:w-1/2">
-
+            <!-- Form section -->
+            <div class="w-full md:w-1/2 flex flex-col justify-center">
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <form method="POST" action="{{ route('login') }}" class="space-y-6 py-4 pl-10 pr-0">
-                <h2 class="text-2xl font-semibold mb-6 text-center">Login to Your Account</h2>
+                <form method="POST" action="{{ route('login') }}" class="space-y-6 py-4 px-0 md:pl-10">
+                    <h2 class="text-2xl font-semibold mb-6 text-center md:text-left">Login to Your Account</h2>
 
                     @csrf
 
                     <!-- Email -->
                     <div>
                         <x-input-label for="email" value="Email" />
-                        <x-text-input id="email" class="w-full mt-2" type="email" name="email" :value="old('email')" required autofocus />
+                        <x-text-input id="email" class="w-full mt-2" type="email" name="email" :value="old('email')"
+                            required autofocus />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
@@ -33,10 +35,14 @@
                     <!-- Remember Me -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center">
-                            <input type="checkbox" name="remember" class="rounded border-gray-500 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                            <input type="checkbox" name="remember"
+                                class="rounded border-gray-500 text-indigo-600 shadow-sm focus:ring-indigo-500">
                             <span class="ml-2 text-sm">Remember me</span>
                         </label>
-                        <a href="#" class="text-sm text-indigo-700 dark:text-indigo-400 hover:underline">Forgot password?</a>
+                        <a href="{{ route('register') }}"
+                            class="text-sm text-indigo-700 dark:text-indigo-400 hover:underline">
+                            Don't have an account?
+                        </a>
                     </div>
 
                     <div>

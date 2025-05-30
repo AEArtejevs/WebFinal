@@ -6,10 +6,9 @@ use App\Models\Recipes;
 use App\Models\Ingredients;
 use App\Models\Category;
 use App\Models\IngredientsRecipes;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Ddt\DumpServer\Facades\DumpServer;
-
 
 class RecipesController extends Controller
 {
@@ -19,9 +18,8 @@ class RecipesController extends Controller
 
     public function home()
     {
-        // $recipes = Recipes::where('users_id', Auth::id())->paginate(5);
         $recipes = Recipes::paginate(10);
-        return view("access.viewer.home", compact('recipes'));
+        return view('access.viewer.home', compact('recipes'));
     }
     public function recipesByCategory($categoryId)
     {
@@ -36,11 +34,17 @@ class RecipesController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        // $recipes = Recipes::where('users_id', Auth::id())->paginate(5);
-        $recipes = Recipes::paginate(10);
-        return view("access.viewer.index", compact('recipes'));
+        $favoriteRecipeIds = Favorite::where('user_id', Auth::id())->pluck('recipe_id');
+
+        $search = $request->input('search');
+
+        $recipes = Recipes::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%");
+        })->paginate(10);
+
+        return view("access.viewer.index", compact('recipes','favoriteRecipeIds'));
     }
 
     /**
