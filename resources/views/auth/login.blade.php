@@ -2,13 +2,11 @@
     <div class="flex items-center justify-center min-h-screen">
         <div class="flex flex-col md:flex-row bg-white p-10 m-4 rounded-xl shadow-md w-full max-w-4xl dark:bg-gray-800">
 
-            <!-- Logo section -->
             <div
                 class="flex items-center justify-center w-full md:w-1/2 border-b md:border-b-0 md:border-r border-gray-700 md:pr-8 pb-8 md:pb-0">
                 <x-application-logo class="w-24 h-24 text-white" />
             </div>
 
-            <!-- Form section -->
             <div class="w-full md:w-1/2 flex flex-col justify-center">
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -17,7 +15,6 @@
 
                     @csrf
 
-                    <!-- Email -->
                     <div>
                         <x-input-label for="email" value="Email" />
                         <x-text-input id="email" class="w-full mt-2" type="email" name="email" :value="old('email')"
@@ -25,24 +22,26 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
-                    <!-- Password -->
                     <div>
                         <x-input-label for="password" value="Password" />
                         <x-text-input id="password" class="w-full mt-2" type="password" name="password" required />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
-                    <!-- Remember Me -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center">
                             <input type="checkbox" name="remember"
                                 class="rounded border-gray-500 text-indigo-600 shadow-sm focus:ring-indigo-500">
                             <span class="ml-2 text-sm">Remember me</span>
                         </label>
-                        <a href="{{ route('register') }}"
-                            class="text-sm text-indigo-700 dark:text-indigo-400 hover:underline">
+
+                        <p class="text-center text-sm text-gray-600 dark:text-gray-400">
                             Don't have an account?
-                        </a>
+                            <a href="{{ route('register') }}"
+                                class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                Register
+                            </a>
+                        </p>
                     </div>
 
                     <div>

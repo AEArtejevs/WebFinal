@@ -18,10 +18,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    public function favorites()
-    {
-        return $this->belongsToMany(Recipes::class, 'favorites', 'user_id', 'recipe_id');
-    }
+
     protected $fillable = [
         'name',
         'email',
@@ -49,5 +46,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password', //=> 'hashed',
         ];
+    }
+    public function favorites()
+    {
+        return $this->belongsToMany(Recipes::class, 'favorites', 'user_id', 'recipe_id');
+    }
+    public function recipes()
+    {
+        return $this->hasMany(Recipes::class, 'user_id', 'id');
     }
 }

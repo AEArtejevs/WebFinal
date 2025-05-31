@@ -1,6 +1,5 @@
 <x-guest-layout>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Header -->
         <div class="flex flex-col rounded my-3">
             <h1 class="font-bold border-b border-gray-600 flex flex-row justify-between items-center py-2 uppercase">
                 Most Popular Recipes
@@ -20,13 +19,11 @@
                                 class="p-1 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 aria-label="Bookmark Recipe" title="Bookmark Recipe">
                                 @if ($favoriteRecipeIds->contains($recipe->id))
-                                    <!-- Filled bookmark icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600"
                                         fill="currentColor" viewBox="0 0 24 24" stroke="none">
                                         <path d="M5 5v14l7-7 7 7V5z" />
                                     </svg>
                                 @else
-                                    <!-- Hollow bookmark icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14l7-7 7 7V5z" />
@@ -41,28 +38,33 @@
                                 class="w-full h-full object-cover" />
                         </div>
 
-                        <div class="p-5">
+                        <div class="p-5 flex flex-col">
                             <h5
                                 class="mb-2 md:text-xl font-bold tracking-tight text-gray-900 break-all dark:text-white">
                                 {{ $recipe->name }}
                             </h5>
                             <p
-                                class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis">
+                                class="mb-3 font-normal text-xs text-gray-700 break-all dark:text-gray-400 overflow-hidden overflow-ellipsis flex-grow">
                                 {{ $recipe->description }}
                             </p>
+
+                            <a href="{{ route('recipes.show', $recipe->id) }}"
+                                class="mt-auto text-center inline-block px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                More info
+                            </a>
                         </div>
+
                     </div>
                 @endforeach
             </div>
 
-            <!-- Pagination -->
             <div class="mt-6">
                 {!! $recipes->links() !!}
             </div>
         @else
-            <div class="mt-6 text-center text-gray-700 dark:text-gray-300 font-semibold">
+            <h1 class="bg-gray-200 p-2 font-semibold rounded text-center dark:bg-gray-800">
                 No recipes found.
-            </div>
+            </h1>
         @endif
     </div>
 </x-guest-layout>

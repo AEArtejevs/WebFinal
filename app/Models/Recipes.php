@@ -23,14 +23,16 @@ class Recipes extends Model
         'user_id',
     ];
 
-    public function Users()
+    public function user()
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function Category()
+
+    public function category()
     {
-        return $this->hasOne(Category::class, 'id', 'category_id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
+
     public function ingredients()
     {
         return $this->belongsToMany(Ingredients::class, 'recipe_ingredients', 'recipe_id', 'ingredient_id')

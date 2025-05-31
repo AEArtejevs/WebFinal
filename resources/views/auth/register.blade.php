@@ -12,11 +12,9 @@
             <!-- Register Form -->
             <div class="w-full md:w-1/2 flex flex-col justify-center">
                 <form method="POST" action="{{ route('register') }}" class="space-y-6 py-4 px-0 md:pl-10">
+                    @csrf
                     <h2 class="text-2xl font-semibold mb-6 text-center md:text-left">Create an Account</h2>
 
-                    @csrf
-
-                    <!-- Name -->
                     <div>
                         <x-input-label for="name" value="Name" />
                         <x-text-input id="name" class="w-full mt-2" type="text" name="name" :value="old('name')"
@@ -24,7 +22,6 @@
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
-                    <!-- Email -->
                     <div>
                         <x-input-label for="email" value="Email" />
                         <x-text-input id="email" class="w-full mt-2" type="email" name="email" :value="old('email')"
@@ -32,14 +29,12 @@
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
-                    <!-- Password -->
                     <div>
                         <x-input-label for="password" value="Password" />
                         <x-text-input id="password" class="w-full mt-2" type="password" name="password" required />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
-                    <!-- Confirm Password -->
                     <div>
                         <x-input-label for="password_confirmation" value="Confirm Password" />
                         <x-text-input id="password_confirmation" class="w-full mt-2" type="password"
