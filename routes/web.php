@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Auth\CustomRegisterController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::post('/register', [CustomRegisterController::class, 'register'])->name('r
 
 
 Route::middleware('auth')->group(function () {
+    
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     
     // Recipes management
     Route::get('/my-recipes', [RecipesController::class, 'userRecipes'])->name('my.recipes');
