@@ -23,10 +23,22 @@
                     </div>
 
                     <div>
+                        <x-input-label for="last_name" value="Last Name" />
+                        <x-text-input id="last_name" class="w-full mt-2" type="text" name="last_name" :value="old('last_name')" required />
+                        <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+                    </div>
+
+                    <div>
                         <x-input-label for="email" value="Email" />
                         <x-text-input id="email" class="w-full mt-2" type="email" name="email" :value="old('email')"
                             required />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
+
+                    <div>
+                        <x-input-label for="profile_image" value="Profile Image URL (optional)" />
+                        <x-text-input id="profile_image" class="w-full mt-2" type="text" name="profile_image" :value="old('profile_image')" />
+                        <x-input-error :messages="$errors->get('profile_image')" class="mt-2" />
                     </div>
 
                     <div>
